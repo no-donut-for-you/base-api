@@ -9,5 +9,5 @@ module.exports = app => {
   app.use('/api/v1/jobs', jobs)
   app.use('/api/v1/balances', balances)
 
-  app.use('/admin/v1', adminProfiles)
+  app.use('/admin/v1', adminProfiles.router)
 }

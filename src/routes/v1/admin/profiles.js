@@ -5,22 +5,29 @@ const { Profile, Contract, Job } = require('../../../models')
 
 const router = express.Router()
 
-/* GET /best-profession */
-router.get('/best-profession', async (req, res) => {
+const validateDates = (req, res) => {
+  const format = 'MM-DD-YYYY'
   const { start, end } = req.query
 
   if (!start || !end) {
     return res.status(400).json({ error: 'start and end are required' })
   }
 
-  const startDate = moment(start, 'MM-DD-YYYY', true)
-  const endDate = moment(end, 'MM-DD-YYYY', true)
+  const startDate = moment(start, format, true)
+  const endDate = moment(end, format, true)
 
   if (!startDate.isValid() || !endDate.isValid()) {
     return res
       .status(400)
       .json({ error: 'start and end must be valid dates. Date format is: MM-DD-YYYY' })
   }
+
+  return { startDate: startDate.format(format), endDate: endDate.format(format) }
+}
+
+/* GET /best-profession */
+router.get('/best-profession', async (req, res) => {
+  const { startDate, endDate } = validateDates(req, res)
 
   const profiles = await Profile.findAll({
     attributes: [
@@ -39,7 +46,7 @@ router.get('/best-profession', async (req, res) => {
             attributes: [],
             where: {
               paid: true,
-              paymentDate: { [Op.between]: [start, end] },
+              paymentDate: { [Op.between]: [startDate, endDate] },
             },
           },
         ],
@@ -110,4 +117,4 @@ router.get('/best-clients', async (req, res) => {
   return res.status(200).json({ bestClients: profiles })
 })
 
-module.exports = router
+module.exports = { router, validateDates }
