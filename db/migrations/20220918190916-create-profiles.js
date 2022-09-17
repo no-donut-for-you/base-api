@@ -38,6 +38,10 @@ module.exports = {
         allowNull: false,
       },
     })
+
+    await queryInterface.addIndex('profiles', ['id', 'type'], {
+      indexName: 'profiles_id_and_type',
+    })
   },
 
   down: async queryInterface => {

@@ -39,6 +39,26 @@ module.exports = {
         allowNull: false,
       },
     })
+
+    await queryInterface.addIndex('contracts', ['status'], {
+      indexName: 'contracts_status',
+    })
+
+    await queryInterface.addIndex('contracts', ['status', 'contractor_id', 'client_id'], {
+      indexName: 'contracts_status_and_contractor_id_and_client_id',
+    })
+
+    await queryInterface.addIndex('contracts', ['id', 'contractor_id', 'client_id'], {
+      indexName: 'contracts_id_and_contractor_id_and_client_id',
+    })
+
+    await queryInterface.addIndex('contracts', ['id', 'contractor_id'], {
+      indexName: 'contracts_id_and_contractor_id',
+    })
+
+    await queryInterface.addIndex('contracts', ['id', 'client_id'], {
+      indexName: 'contracts_id_and_client_id',
+    })
   },
 
   down: async queryInterface => {

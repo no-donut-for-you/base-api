@@ -39,6 +39,14 @@ module.exports = {
         allowNull: false,
       },
     })
+
+    await queryInterface.addIndex('jobs', ['paid'], {
+      indexName: 'jobs_paid',
+    })
+
+    await queryInterface.addIndex('jobs', ['id', 'paid'], {
+      indexName: 'jobs_id_and_paid',
+    })
   },
 
   down: async queryInterface => {
