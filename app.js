@@ -24,6 +24,7 @@ app.use(bodyParser.json())
 app.use(cors())
 
 app.all('/api/v1/*', Auth.basic, Auth.getProfile)
+app.all('/admin/v1/*', Auth.basic)
 
 // routes definitions
 const routes = require('./src/routes/v1')
