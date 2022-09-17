@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "root",
+    "password": null,
+    "database": "database_development",
+    "dialect": "sqlite",
+    "storage": "db/database_development.sqlite",
+    "define": {
+      "underscored": true
+    }
+  },
+
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "dialect": "sqlite",
+    "storage": "db/database_test.sqlite",
+    "define": {
+      "underscored": true
+    }
+  }
+}
