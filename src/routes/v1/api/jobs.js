@@ -13,7 +13,6 @@ const jobAttributes = [
   'paid',
   'paymentDate'
 ]
-
 const profileAttributes = [
   'id',
   'firstName',
@@ -22,7 +21,6 @@ const profileAttributes = [
   'type',
   'balance',
 ]
-
 const contractAttributes = [
   'id',
   'clientId',
@@ -32,140 +30,140 @@ const contractAttributes = [
 ]
 
 /**
-   * @swagger
-   * tags:
-   *   name: Jobs
-   *   description: API to get jobs.
-   * components:
-   *   schemas:
-   *     Job:
-   *       type: object
-   *       properties:
-   *         id:
-   *           type: integer
-   *           description: The contract id.
-   *           example: 1
-   *         contractId:
-   *           type: integer
-   *           description: The foreign key to contract.
-   *           example: 1
-   *         description:
-   *           type: string
-   *           description: The description of the contract.
-   *           example: Lorem ipsum dolor sit amet
-   *         price:
-   *           type: decimal
-   *           description: The price of the contract.
-   *           example: 4999.99
-   *         paymentDate:
-   *           type: date
-   *           description: The date of the payment.
-   *           example: 2020-08-16T19:11:26.737Z
-   *         contract:
-   *           type: object
-   *           properties:
-   *             id:
-   *               type: integer
-   *               description: The contract id.
-   *               example: 1
-   *             clientId:
-   *               type: integer
-   *               description: The foreign key to client.
-   *               example: 1
-   *             contractorId:
-   *               type: integer
-   *               description: The foreign key to contractor.
-   *               example: 1
-   *             terms:
-   *               type: string
-   *               description: The terms of the contract.
-   *               example: Lorem ipsum dolor sit amet
-   *             status:
-   *               type: string
-   *               description: Thes status of the contract. The status are 'pending', 'accepted', 'rejected', 'terminated'.
-   *               example: in_progress
-   *             contractor:
-   *               type: object
-   *               properties:
-   *                 id:
-   *                   type: integer
-   *                   description: The profile id.
-   *                   example: 1
-   *                 firstName:
-   *                   type: string
-   *                   description: The first name of the contractor profile.
-   *                   example: Nikole
-   *                 lastName:
-   *                   type: string
-   *                   description: The last name of the contractor profile.
-   *                   example: Tesle
-   *                 profession:
-   *                   type: strong
-   *                   description: The contractor profile profession.
-   *                   example: Inventor
-   *                 balance:
-   *                   type: decimal
-   *                   description: The contractor profile balance.
-   *                   example: 10
-   *                 type:
-   *                   type: string
-   *                   description: The contractor profile type.
-   *                   example: contractor
-   *             client:
-   *               type: object
-   *               properties:
-   *                 id:
-   *                   type: integer
-   *                   description: The profile id.
-   *                   example: 1
-   *                 firstName:
-   *                   type: string
-   *                   description: The first name of the client.
-   *                   example: Thomas
-   *                 lastName:
-   *                   type: string
-   *                   description: The last name of the client.
-   *                   example: Edison
-   *                 profession:
-   *                   type: strong
-   *                   description: The client profession.
-   *                   example: Thief
-   *                 balance:
-   *                   type: decimal
-   *                   description: client.
-   *                   example: 10000
-   *                 type:
-   *                   type: string
-   *                   description: The client type.
-   *                   example: client
-   */
+* @swagger
+* tags:
+*   name: Jobs
+*   description: API to pay jobs and get a list of unpaind jobs.
+* components:
+*   schemas:
+*     Job:
+*       type: object
+*       properties:
+*         id:
+*           type: integer
+*           description: The contract id.
+*           example: 1
+*         contractId:
+*           type: integer
+*           description: The foreign key to contract.
+*           example: 1
+*         description:
+*           type: string
+*           description: The description of the contract.
+*           example: Lorem ipsum dolor sit amet
+*         price:
+*           type: decimal
+*           description: The price of the contract.
+*           example: 4999.99
+*         paymentDate:
+*           type: date
+*           description: The date of the payment.
+*           example: 2020-08-16T19:11:26.737Z
+*         contract:
+*           type: object
+*           properties:
+*             id:
+*               type: integer
+*               description: The contract id.
+*               example: 1
+*             clientId:
+*               type: integer
+*               description: The foreign key to client.
+*               example: 1
+*             contractorId:
+*               type: integer
+*               description: The foreign key to contractor.
+*               example: 1
+*             terms:
+*               type: string
+*               description: The terms of the contract.
+*               example: Lorem ipsum dolor sit amet
+*             status:
+*               type: string
+*               description: Thes status of the contract. The status are 'pending', 'accepted', 'rejected', 'terminated'.
+*               example: in_progress
+*             contractor:
+*               type: object
+*               properties:
+*                 id:
+*                   type: integer
+*                   description: The profile id.
+*                   example: 1
+*                 firstName:
+*                   type: string
+*                   description: The first name of the contractor profile.
+*                   example: Nikole
+*                 lastName:
+*                   type: string
+*                   description: The last name of the contractor profile.
+*                   example: Tesle
+*                 profession:
+*                   type: strong
+*                   description: The contractor profile profession.
+*                   example: Inventor
+*                 balance:
+*                   type: decimal
+*                   description: The contractor profile balance.
+*                   example: 10
+*                 type:
+*                   type: string
+*                   description: The contractor profile type.
+*                   example: contractor
+*             client:
+*               type: object
+*               properties:
+*                 id:
+*                   type: integer
+*                   description: The profile id.
+*                   example: 1
+*                 firstName:
+*                   type: string
+*                   description: The first name of the client.
+*                   example: Thomas
+*                 lastName:
+*                   type: string
+*                   description: The last name of the client.
+*                   example: Edison
+*                 profession:
+*                   type: strong
+*                   description: The client profession.
+*                   example: Thief
+*                 balance:
+*                   type: decimal
+*                   description: client.
+*                   example: 10000
+*                 type:
+*                   type: string
+*                   description: The client type.
+*                   example: client
+*/
 
 /**
-   * @swagger
-   * /api/v1/jobs/unpaid:
-   *   get:
-   *     tags: [Jobs]
-   *     security:
-   *      - basicAuth: []
-   *     summary: Retrieve a list of unpaind jobs.
-   *     description: Returns a list of unpaind jobs.
-   *     parameters:
-   *       - in: header
-   *         name: profile_id
-   *         required: true
-   *         description: Numeric ID of the profile contract to retrieve.
-   *         schema:
-   *           type: integer
-   *     responses:
-   *       200:
-   *         description: A list of jobs.
-   *         content:
-   *           application/json:
-   *             schema:
-   *               type: array
-   *               jobs:
-   *                 $ref: '#/components/schemas/Job'
-   */
+* @swagger
+* /api/v1/jobs/unpaid:
+*   get:
+*     tags: [Jobs]
+*     security:
+*      - basicAuth: []
+*     summary: Retrieve a list of unpaind jobs.
+*     description: Get all unpaid jobs for a user (***either*** a client or contractor), for ***active contracts only***.
+*     parameters:
+*       - in: header
+*         name: profile_id
+*         required: true
+*         description: Numeric ID of the profile contract to retrieve.
+*         schema:
+*           type: integer
+*     responses:
+*       200:
+*         description: A list of jobs.
+*         content:
+*           application/json:
+*             schema:
+*               type: array
+*               jobs:
+*                 $ref: '#/components/schemas/Job'
+*/
 router.get('/unpaid', async (req, res) => {
   const profileId = req.get('profile_id')
 
@@ -201,38 +199,38 @@ router.get('/unpaid', async (req, res) => {
 })
 
 /**
- * @swagger
- * /api/v1/jobs/{id}/pay:
- *   post:
- *     tags: [Jobs]
- *     security:
- *      - basicAuth: []
- *     summary: Pay an unpaind job.
- *     description: Pay for a job, a client can only pay if his balance >= the amount to pay. The amount should be moved from the client's balance to the contractor balance.
- *     parameters:
- *       - in: header
- *         name: profile_id
- *         required: true
- *         description: The profile contract to retrieve.
- *         schema:
- *           type: integer
- *       - in: path
- *         name: id
- *         required: true
- *         description: The job id to pay.
- *         schema:
- *           type: integer
- *     responses:
- *       200:
- *         description: The paid job.
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 job:
- *                   type: object
- *                   $ref: '#/components/schemas/Job'
+* @swagger
+* /api/v1/jobs/{id}/pay:
+*   post:
+*     tags: [Jobs]
+*     security:
+*      - basicAuth: []
+*     summary: Pay an unpaind job.
+*     description: Pay for a job, a client can only pay if his balance >= the amount to pay. The amount should be moved from the client's balance to the contractor balance.
+*     parameters:
+*       - in: header
+*         name: profile_id
+*         required: true
+*         description: The profile contract to retrieve.
+*         schema:
+*           type: integer
+*       - in: path
+*         name: id
+*         required: true
+*         description: The job id to pay.
+*         schema:
+*           type: integer
+*     responses:
+*       200:
+*         description: The paid job.
+*         content:
+*           application/json:
+*             schema:
+*               type: object
+*               properties:
+*                 job:
+*                   type: object
+*                   $ref: '#/components/schemas/Job'
 */
 router.post('/:id/pay', async (req, res) => {
   const profileId = req.get('profile_id')
