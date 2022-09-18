@@ -14,6 +14,8 @@ const logger = Logger.init()
 
 const app = express()
 
+require('./swagger')(app)
+
 if (process.env.NODE_ENV !== 'test') {
   app.use(morgan('combined', {
     stream: logger.stream,
