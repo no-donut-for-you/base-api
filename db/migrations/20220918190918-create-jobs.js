@@ -44,6 +44,10 @@ module.exports = {
       indexName: 'jobs_paid',
     })
 
+    await queryInterface.addIndex('jobs', ['paid', 'payment_date'], {
+      indexName: 'jobs_paid_and_payment_date',
+    })
+
     await queryInterface.addIndex('jobs', ['id', 'paid'], {
       indexName: 'jobs_id_and_paid',
     })
