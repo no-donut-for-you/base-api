@@ -57,7 +57,7 @@ describe('GET /api/v1/jobs/unpaid', () => {
         'description',
         'price',
         'paid',
-        'paymentDate'
+        'paymentDate',
       ],
       where: {
         paid: false,
@@ -65,11 +65,37 @@ describe('GET /api/v1/jobs/unpaid', () => {
       include: {
         model: Contract,
         as: 'contract',
-        attributes: [],
+        attributes: ['id', 'clientId', 'contractorId', 'terms', 'status'],
         where: {
           status: 'in_progress',
           [Op.or]: [{ contractorId: 'fake' }, { clientId: 'fake' }],
         },
+        include: [
+          {
+            attributes: [
+              'id',
+              'firstName',
+              'lastName',
+              'profession',
+              'type',
+              'balance',
+            ],
+            model: Profile,
+            as: 'client',
+          },
+          {
+            attributes: [
+              'id',
+              'firstName',
+              'lastName',
+              'profession',
+              'type',
+              'balance',
+            ],
+            model: Profile,
+            as: 'contractor',
+          },
+        ],
       },
     })
     expect(res.status).toEqual(200)
