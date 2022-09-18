@@ -35,6 +35,30 @@ const appClient = request(app)
 process.env.BASIC_AUTH_USERNAME = 'fake'
 process.env.BASIC_AUTH_PASSWORD = 'fake'
 
+const contractAttributes = [
+  'id',
+  'clientId',
+  'contractorId',
+  'terms',
+  'status',
+]
+const profileAttributes = [
+  'id',
+  'firstName',
+  'lastName',
+  'profession',
+  'type',
+  'balance',
+]
+const jobAttributes = [
+  'id',
+  'contractId',
+  'description',
+  'price',
+  'paid',
+  'paymentDate',
+]
+
 describe('GET /api/v1/jobs/unpaid', () => {
   const path = '/api/v1/jobs/unpaid'
 
@@ -51,47 +75,26 @@ describe('GET /api/v1/jobs/unpaid', () => {
       .set('profile_id', 'fake')
 
     expect(Job.findAll).toHaveBeenCalledWith({
-      attributes: [
-        'id',
-        'contractId',
-        'description',
-        'price',
-        'paid',
-        'paymentDate',
-      ],
+      attributes: jobAttributes,
       where: {
         paid: false,
       },
       include: {
         model: Contract,
         as: 'contract',
-        attributes: ['id', 'clientId', 'contractorId', 'terms', 'status'],
+        attributes: contractAttributes,
         where: {
           status: 'in_progress',
           [Op.or]: [{ contractorId: 'fake' }, { clientId: 'fake' }],
         },
         include: [
           {
-            attributes: [
-              'id',
-              'firstName',
-              'lastName',
-              'profession',
-              'type',
-              'balance',
-            ],
+            attributes: profileAttributes,
             model: Profile,
             as: 'client',
           },
           {
-            attributes: [
-              'id',
-              'firstName',
-              'lastName',
-              'profession',
-              'type',
-              'balance',
-            ],
+            attributes: profileAttributes,
             model: Profile,
             as: 'contractor',
           },
@@ -111,14 +114,7 @@ describe('POST /api/v1/jobs/:id/pay', () => {
   })
 
   const expectedQuery = {
-    attributes: [
-      'id',
-      'contractId',
-      'description',
-      'price',
-      'paid',
-      'paymentDate',
-    ],
+    attributes: jobAttributes,
     where: {
       id: '1',
       paid: false,
@@ -126,19 +122,19 @@ describe('POST /api/v1/jobs/:id/pay', () => {
     include: {
       model: Contract,
       as: 'contract',
-      attributes: ['id', 'clientId', 'contractorId', 'terms', 'status'],
+      attributes: contractAttributes,
       where: {
         status: 'in_progress',
         clientId: 'fake',
       },
       include: [
         {
-          attributes: ['id', 'firstName', 'lastName', 'profession', 'type', 'balance'],
+          attributes: profileAttributes,
           model: Profile,
           as: 'client',
         },
         {
-          attributes: ['id', 'firstName', 'lastName', 'profession', 'type', 'balance'],
+          attributes: profileAttributes,
           model: Profile,
           as: 'contractor',
         },
