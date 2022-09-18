@@ -14,6 +14,10 @@
 
 6 - Access the Swagger UI url to make some calls: http://localhost:3001/api-docs/
 
+### Running test
+
+Run the `npm test` command
+
 The deel api is using basic auth to authenticate each request. The default user is `deel-api` and the password is `deel@123`. You'll need to provide it by clicking on the "Authorize" button on the Swagger URL.
 
 💫 Welcome! 🎉
