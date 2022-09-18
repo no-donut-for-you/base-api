@@ -5,7 +5,78 @@ const { Contract, Job, Profile, sequelize } = require('../../../models')
 
 const router = express.Router()
 
-/* POST /balances/deposit/:clientId */
+/**
+* @swagger
+* tags:
+*   name: Balances
+*   description: API to deposits money into the client balance.
+*/
+
+/**
+* @swagger
+* /api/v1/balances/deposit/{clientId}:
+*   post:
+*     tags: [Balances]
+*     security:
+*      - basicAuth: []
+*     summary: Deposit money into the client balance.
+*     description: Deposits money into the the the balance of a client, a client can't deposit more than 25% his total of jobs to pay. (at the deposit moment)
+*     requestBody:
+*       required: true
+*       content:
+*         application/json:
+*           schema:
+*             type: object
+*             properties:
+*               amount:
+*                 type: decimal
+*                 description: Amount to deposit into the client balance.
+*                 example: 200
+*     parameters:
+*       - in: header
+*         name: profile_id
+*         required: true
+*         description: Numeric ID of the profile contract to retrieve.
+*         schema:
+*           type: integer
+*       - in: path
+*         name: clientId
+*         required: true
+*         description: The client id to deposit balance.
+*         schema:
+*           type: integer
+*     responses:
+*       200:
+*         description: The success deposit confirm.
+*         content:
+*           application/json:
+*             schema:
+*               properties:
+*                 message:
+*                   type: object
+*                   description: The success message.
+*                   example: Deposit successful
+*       403:
+*         description: When client id and profile are not matching.
+*         content:
+*           application/json:
+*             schema:
+*               properties:
+*                 errors:
+*                   type: object
+*                   description: The error message.
+*                   example: client ID and profile ID are not matching
+*       400:
+*         description: When amount is not provided.
+*         content:
+*           application/json:
+*             schema:
+*               properties:
+*                 errors:
+*                   type: object
+*                   description: The error message.
+*                   example: Missing amount
+*/
 router.post('/deposit/:clientId', async (req, res) => {
   const profileId = req.get('profile_id')
   const clientId = req.params.clientId
