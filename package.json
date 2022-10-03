@@ -1,5 +1,5 @@
 {
-  "name": "deel-task",
+  "name": "base-task",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

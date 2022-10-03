@@ -2,7 +2,7 @@
   "swaggerDefinition": {
     "openapi": "3.0.3",
     "info": {
-      "title": "Deel task API",
+      "title": "Base task API",
       "version": "1.0.0"
     },
 
