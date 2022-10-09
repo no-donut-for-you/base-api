@@ -19,10 +19,6 @@ const options = {
   logging: log => logger.debug(log),
 }
 
-if (config.dialect === 'sqlite') {
-  options.storage = config.storage
-}
-
 const sequelize = new Sequelize(
   config.database,
   config.username,

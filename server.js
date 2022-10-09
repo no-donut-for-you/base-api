@@ -2,7 +2,7 @@ const http = require('http')
 const app = require('./app')
 const { Logger } = require('./src/utils')
 
-const port = normalizePort(process.env.PORT || '3001')
+const port = normalizePort(process.env.PORT || '8080')
 const logger = Logger.init()
 
 const server = http.createServer(app)

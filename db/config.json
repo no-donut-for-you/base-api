@@ -1,21 +1,21 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "database_development",
-    "dialect": "sqlite",
-    "storage": "db/database_development.sqlite",
+    "username": "postgres",
+    "password": "postgres",
+    "database": "base_api_development",
+    "host": "postgres",
+    "dialect": "postgresql",
     "define": {
       "underscored": true
     }
   },
 
   "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
-    "dialect": "sqlite",
-    "storage": "db/database_test.sqlite",
+    "username": "postgres",
+    "password": "postgres",
+    "database": "base_api_test",
+    "host": "postgres",
+    "dialect": "postgresql",
     "define": {
       "underscored": true
     }
