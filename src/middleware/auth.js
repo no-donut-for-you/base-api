@@ -1,21 +1,4 @@
 const basicAuth = require('basic-auth')
-const { Profile } = require('../models')
-
-const getProfile = async (req, res, next) => {
-  const id = req.get('profile_id')
-
-  if (!id) {
-    return res.status(401).json({ message: 'Unauthorized. profile_id not provided.' })
-  }
-
-  const profile = await Profile.findOne({ where: { id } })
-
-  if (!profile) {
-    return res.status(401).json({ message: 'Unauthorized. Profile not found.' })
-  }
-
-  return next()
-}
 
 const basic = async (req, res, next) => {
   function unauthorized(res) {
@@ -40,4 +23,4 @@ const basic = async (req, res, next) => {
   return unauthorized(res)
 }
 
-module.exports = { getProfile, basic }
+module.exports = { basic }

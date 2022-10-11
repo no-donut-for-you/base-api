@@ -36,7 +36,7 @@ module.exports = function (sequelize, DataTypes) {
 
   Car.associate = models => {
     Car.belongsTo(models.User, { as: 'user', foreignKey: 'owner_id' })
-    Car.belongsTo(models.Brand, { as: 'brand', foreignKey: 'brands' })
+    Car.belongsTo(models.Brand, { as: 'brand', foreignKey: 'brand_id' })
     Car.hasMany(models.Auction, { as: 'auctions', foreignKey: 'car_id' })
   }
 
