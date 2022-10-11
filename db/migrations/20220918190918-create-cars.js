@@ -1,33 +1,43 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('jobs', {
+    await queryInterface.createTable('cars', {
       id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true,
       },
+      name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        notEmpty: true,
+      },
       description: {
         type: Sequelize.TEXT,
         notEmpty: true,
       },
-      contract_id: {
+      owner_id: {
         type: Sequelize.INTEGER,
         notEmpty: true,
         references: {
-          model: 'contracts',
+          model: 'users',
           key: 'id',
         },
       },
-      price: {
-        type: Sequelize.REAL(10, 2),
-        defaultValue: 0,
+      brand_id: {
+        type: Sequelize.INTEGER,
+        notEmpty: true,
+        references: {
+          model: 'brands',
+          key: 'id',
+        },
       },
-      paid: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false,
+      year: {
+        type: Sequelize.STRING,
+        allowNull: false,
       },
-      payment_date: {
-        type: Sequelize.DATE,
+      chassis: {
+        type: Sequelize.STRING,
+        allowNull: false,
         notEmpty: true,
       },
       created_at: {
@@ -40,20 +50,12 @@ module.exports = {
       },
     })
 
-    await queryInterface.addIndex('jobs', ['paid'], {
-      indexName: 'jobs_paid',
-    })
-
-    await queryInterface.addIndex('jobs', ['paid', 'payment_date'], {
-      indexName: 'jobs_paid_and_payment_date',
-    })
-
-    await queryInterface.addIndex('jobs', ['id', 'paid'], {
-      indexName: 'jobs_id_and_paid',
+    await queryInterface.addIndex('cars', ['name'], {
+      indexName: 'cars_name',
     })
   },
 
   down: async queryInterface => {
-    await queryInterface.dropTable('jobs')
+    await queryInterface.dropTable('cars')
   },
 }
