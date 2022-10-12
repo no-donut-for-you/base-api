@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@elastic/elasticsearch": "^8.4.0",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.2",
@@ -24,7 +25,9 @@
     "db:migrate:undo": "sequelize db:migrate:undo",
     "db:migrate:undo:all": "sequelize db:migrate:undo:all",
     "db:seed:all": "sequelize db:seed:all",
-    "db:seed:undo:all": "sequelize db:seed:undo:all"
+    "db:seed:undo:all": "sequelize db:seed:undo:all",
+    "elasticsearch:indices:cars:create": "node src/elasticsearch/cars/index/create",
+    "elasticsearch:indices:cars:sync:data": "node src/elasticsearch/cars/index/syncData"
   },
   "devDependencies": {
     "eslint": "^8.23.1",
@@ -35,7 +38,7 @@
     "supertest": "^6.2.4"
   },
   "engines": {
-    "node": ">=10.16.3"
+    "node": ">=16.17.0"
   },
   "engineStrict": true
 }
