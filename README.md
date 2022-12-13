@@ -10,7 +10,7 @@
 
 5 - Run the `npm start` command to start the application (default port is 3001)
 
-6 - Access the Swagger UI url to make some calls: http://localhost:3001/api-docs/
+6 - Access the Swagger UI url to make some calls: http://localhost:8080/api-docs/
 
 ### Running test
 
