@@ -1,20 +1,21 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('bids', {
+    await queryInterface.createTable('cars', {
       id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true,
       },
-      auction_id: {
-        type: Sequelize.INTEGER,
+      name: {
+        type: Sequelize.STRING,
+        allowNull: false,
         notEmpty: true,
-        references: {
-          model: 'cars',
-          key: 'id',
-        },
       },
-      bidder_id: {
+      description: {
+        type: Sequelize.TEXT,
+        notEmpty: true,
+      },
+      owner_id: {
         type: Sequelize.INTEGER,
         notEmpty: true,
         references: {
@@ -22,12 +23,21 @@ module.exports = {
           key: 'id',
         },
       },
-      bid: {
-        type: Sequelize.DECIMAL(10, 3),
+      brand_id: {
+        type: Sequelize.INTEGER,
+        notEmpty: true,
+        references: {
+          model: 'brands',
+          key: 'id',
+        },
+      },
+      year: {
+        type: Sequelize.INTEGER,
         notEmpty: true,
       },
-      status: {
-        type: Sequelize.ENUM('active', 'refused'),
+      chassis: {
+        type: Sequelize.STRING,
+        allowNull: false,
         notEmpty: true,
       },
       created_at: {
@@ -39,9 +49,13 @@ module.exports = {
         allowNull: false,
       },
     })
+
+    await queryInterface.addIndex('cars', ['name'], {
+      indexName: 'cars_name',
+    })
   },
 
   down: async queryInterface => {
-    await queryInterface.dropTable('bids')
+    await queryInterface.dropTable('cars')
   },
 }

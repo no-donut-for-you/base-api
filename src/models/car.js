@@ -13,7 +13,7 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: false
     },
     year: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
         notNull: true,
@@ -35,7 +35,7 @@ module.exports = function (sequelize, DataTypes) {
   })
 
   Car.associate = models => {
-    Car.belongsTo(models.User, { as: 'user', foreignKey: 'owner_id' })
+    Car.belongsTo(models.User, { as: 'owner', foreignKey: 'owner_id' })
     Car.belongsTo(models.Brand, { as: 'brand', foreignKey: 'brand_id' })
     Car.hasMany(models.Auction, { as: 'auctions', foreignKey: 'car_id' })
   }

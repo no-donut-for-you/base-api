@@ -1,5 +1,5 @@
 const express = require('express')
-const { Car } = require('../../../elasticsearch')
+const { search } = require('../../../elasticsearch/cars')
 
 const router = express.Router()
 
@@ -55,9 +55,9 @@ const router = express.Router()
 *                 $ref: '#/components/schemas/Car'
 */
 router.get('/', async (req, res) => {
-  const cars = await Car.findAll()
+  const cars = await search()
 
-  res.status(200).json({ cars })
+  res.status(200).json(cars)
 })
 
 module.exports = router
